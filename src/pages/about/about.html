@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      About
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-input type="text" [(ngModel)]="texting" placeholder="Enter a message"></ion-input>
+    <button ion-button color="primary" round (click) = "send(texting)">
+      send
+    </button>
+    <ion-list inset>
+
+      <ion-item *ngFor="let message of messages">
+            {{message.user}}: {{message.text}}
+      </ion-item>
+      </ion-list>
+
+</ion-content>

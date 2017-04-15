@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>VPT - Speech Recognizer</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <button ion-button color="primary" round (click) = "SpeechToText()" [disabled]="isRecognizing">
+    <ion-icon name="mic"></ion-icon>
+  </button>
+
+
+
+  <ion-list no-line>
+
+    <ion-item *ngFor="let words of messages" class="item-text-wrap">
+      <ion-row *ngIf ="words.user !== 'App'" item-right style="Color:Green">
+          {{words.user}} : {{words.text}}
+      </ion-row>
+      <ion-row *ngIf ="words.user === 'App'" item-left style="Color:red">
+          {{words.user}} : {{words.text}}
+      </ion-row>
+    </ion-item>
+    </ion-list>
+
+
+
+
+
+</ion-content>
