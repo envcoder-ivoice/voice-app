@@ -5,17 +5,71 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
+<ion-content no-padding>
+  <ion-list no-lines *ngFor="let words of messages" >
+    <ion-item *ngIf ="words.user !== 'App'" item-right>
+      <!-- <h2>User</h2> -->
+      <p item-right>{{words.text}}</p>
+      <ion-avatar item-right >
+        <img src="img/user.png">
+      </ion-avatar>
+    </ion-item>
+    <ion-item *ngIf ="words.user === 'App'" item-left>
+      <ion-avatar item-left>
+        <img src="img/bot.png">
+      </ion-avatar>
+      <!-- <h2>Banker</h2> -->
+      <p>{{words.text}}</p>
+    </ion-item>
+  </ion-list>
 
-<ion-content padding>
-    <ion-input type="text" [(ngModel)]="texting" placeholder="Enter a message"></ion-input>
-    <button ion-button color="primary" round (click) = "send(texting)">
-      send
-    </button>
-    <ion-list inset>
-
-      <ion-item *ngFor="let message of messages">
-            {{message.user}}: {{message.text}}
+    <!-- <ion-list no-lines>
+      <ion-item no-lines *ngFor="let words of messages" text-wrap>
+        <ion-grid>
+          <ion-row *ngIf ="words.user !== 'App'" item-right style="Color:Green" >
+              <ion-col col-10>
+                <h6 style="text-align: right; vertical-align: middle; margin-top: 20px; word-wrap: normal">
+                  {{words.text}}
+                </h6>
+              </ion-col>
+              <ion-col col-2>
+                <ion-avatar item-right>
+                  <img src="img/user.png" />
+                </ion-avatar>
+              </ion-col>
+          </ion-row>
+          <ion-row *ngIf ="words.user === 'App'" item-left style="Color:red">
+            <ion-col col-2>
+              <ion-avatar item-left>
+                <img src="img/bot.png" />
+              </ion-avatar>
+            </ion-col>
+            <ion-col col-10>
+              <h6 style="text-align: left; vertical-align: middle; margin-top: 20px; word-wrap: normal">
+                {{words.text}}
+              </h6>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-item>
-      </ion-list>
-
+    </ion-list> -->
 </ion-content>
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-9>
+        <ion-input type="text" [(ngModel)]="texting" placeholder="Enter a message"></ion-input>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button color = "primary" (click)="send(texting)">
+          send
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
+<!-- <button ion-item no-lines (click) = "send('button clicked')">
+  <ion-item no-lines  style="background: rgba(0,0,0,0);">
+    <img src="img/mic.jpg" class= "logo-services" style="width: 10%; height: 10%"/>
+  </ion-item>
+</button> -->

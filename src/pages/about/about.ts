@@ -11,15 +11,20 @@ export class AboutPage {
   public messages: any[];
 
 
+
   constructor(public navCtrl: NavController, public zone: NgZone) {
     this.texting = '';
     this.messages = [];
 
   }
+
   send(msg){
-    var username = "App";
-    var result = { user: 'App', text: msg};
-  this.messages.push(result);
+    var username = "User";
+    var result = { user: username, text: msg};
+    this.messages.push(result);
+    username = "App";
+    result = { user: username, text: msg};
+    this.messages.push(result);
   }
 
 }

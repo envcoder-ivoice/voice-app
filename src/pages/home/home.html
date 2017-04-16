@@ -1,30 +1,42 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>VPT - Speech Recognizer</ion-title>
+    <ion-title>Voice</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <button ion-button color="primary" round (click) = "SpeechToText()" [disabled]="isRecognizing">
-    <ion-icon name="mic"></ion-icon>
-  </button>
-
-
-
-  <ion-list no-line>
-
-    <ion-item *ngFor="let words of messages" class="item-text-wrap">
-      <ion-row *ngIf ="words.user !== 'App'" item-right style="Color:Green">
-          {{words.user}} : {{words.text}}
-      </ion-row>
-      <ion-row *ngIf ="words.user === 'App'" item-left style="Color:red">
-          {{words.user}} : {{words.text}}
-      </ion-row>
+  <ion-list no-lines *ngFor="let words of messages" >
+    <ion-item *ngIf ="words.user !== 'App'" item-right>
+      <!-- <h2>User</h2> -->
+      <p item-right>{{words.text}}</p>
+      <ion-avatar item-right >
+        <img src="img/user.png">
+      </ion-avatar>
     </ion-item>
-    </ion-list>
-
-
-
-
-
+    <ion-item *ngIf ="words.user === 'App'" item-left>
+      <ion-avatar item-left>
+        <img src="img/bot.png">
+      </ion-avatar>
+      <!-- <h2>Banker</h2> -->
+      <p>{{words.text}}</p>
+    </ion-item>
+  </ion-list>
+  <ion-fab right bottom>
+      <button ion-fab (click) = "SpeechToText()" [disabled]="isRecognizing"><ion-icon name="mic"></ion-icon></button>
+  </ion-fab>
 </ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-9>
+        <ion-input type="text" [(ngModel)]="texting" placeholder="Enter a message"></ion-input>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button color = "primary" (click)="Send(texting)">
+          send
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

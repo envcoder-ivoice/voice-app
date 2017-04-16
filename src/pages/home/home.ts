@@ -84,18 +84,7 @@ export class HomePage {
                             this.resultText = 'Last Text added : \n' + result[0].transcript;
                             this.spokenWords.push(result[0].transcript);
                             this.AppendText("User",result[0].transcript);
-
-                            // this.ToSpeech(result[0].transcript);
                             this.SendToAPIAI(result[0].transcript);
-                            // this.tts.speak({
-                            //       text: result[0].transcript,
-                            //       locale: 'en-US',
-                            //       rate: 1.5
-                            //       }, function () {
-                            //         // Do Something after success
-                            //       }, function (reason) {
-                            //         // Handle the error case
-                            //       });
                             console.log('Text: ' + result[0].transcript);
                             this.presentToast(this.resultText);
                     }
@@ -164,6 +153,10 @@ export class HomePage {
           this.presentToast("Error sending to APIAI");
         });
 
+    }
+    Send(textedquery){
+      this.AppendText("User",textedquery);
+      this.SendToAPIAI(textedquery);
     }
 
 
