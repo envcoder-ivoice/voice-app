@@ -75,7 +75,7 @@ export class HomePage {
             console.log('Stopped recognition.');
             this._zone.run(() => {
                 this.isRecognizing = false;
-                this.presentToast("Stopped recognition.")
+                //this.presentToast("Stopped recognition.")
                 this.isWaiting = false;
             })
         });
@@ -85,7 +85,7 @@ export class HomePage {
             this._zone.run(() => {
                 this.errorCordova = 'Error'
                 this.isRecognizing = false;
-                this.presentToast("Error..." + event.error)
+                //this.presentToast("Error..." + event.error)
                 this.isWaiting = false;
             }
             )
@@ -101,12 +101,13 @@ export class HomePage {
                             this.AppendText("User",result[0].transcript);
                             this.SendToAPIAI(result[0].transcript);
                             console.log('Text: ' + result[0].transcript);
-                            this.presentToast(this.resultText);
+                            //this.presentToast(this.resultText);
                           }
                           else{
                             if(result[0].transcript==="morning"){
                               this.isLoggedIn = true;
                               this.ToSpeech("Welcome to I C I C I Voice");
+
                               this.SendToAPIAI("fetch alert");
                             }
                             else{
@@ -116,7 +117,7 @@ export class HomePage {
                   }
               )
               this.isWaiting = false;
-                      this.isRecognizing = false;
+              this.isRecognizing = false;
             }
         });
     }
@@ -138,6 +139,7 @@ export class HomePage {
 
 
   SpeechToText(){
+    this.ToSpeech("");
     this.statusSpeaker = 'Waiting...';
 
     if(!this.isRecognizing)
@@ -152,14 +154,14 @@ export class HomePage {
 
 
   }
-  ToSpeech(texttotalk){
+   ToSpeech(texttotalk){
     try{
 //      this.presentToast("Welcome");
-      this.tts.speak(texttotalk).then().catch();
+        this.tts.speak(texttotalk).then().catch();
 //      this.presentToast("Spoken Words");
     }catch(e)
     {
-      this.presentToast(e);
+//      this.presentToast(e);
     }
 
 
@@ -179,7 +181,9 @@ export class HomePage {
           this.AppendText("App",returndata);
           this.ToSpeech(response.json().result.fulfillment.speech);
         }, error => {
-          this.presentToast("Error sending to APIAI");
+          this.AppendText("App","Unable to reach banking service, please check your internet connection");
+          this.ToSpeech("Unable to reach banking service, please check your internet connection");
+          //this.presentToast("Error sending to APIAI");
         });
 
     }
